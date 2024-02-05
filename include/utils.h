@@ -29,7 +29,7 @@ namespace dsmap::utils
         has_value_type<T>>;
 
     template <typename T>
-    using is_sequence_v = is_sequence<T>::value;
+    inline constexpr bool is_sequence_v = is_sequence<T>::value;
 
     template <size_t I, typename FuncT, typename DataT>
     void applyOnProperties(DataT &data, FuncT &&func)
