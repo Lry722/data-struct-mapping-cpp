@@ -1,9 +1,10 @@
 ## Introduction
 
 A tool for mapping the contents of a dictionary-like container (that supports value retrieval through the '[]' operator) with strings as keys to an aggregate class.
+
 A typical application pattern is similar to the @ConfigurationProperties annotation in the Spring framework for Java, which maps the contents of a configuration file to a struct that stores the corresponding data.
 
-## Building and Deployment
+## Building and Installation
 
 This project uses SCons as its build tool.
 
@@ -14,6 +15,8 @@ scons install
 ```
 
 For integrating this project to your own project, a SConscript file has been provided. You just need to recieve the library object returned by the SConscript and link it.
+
+The tool depends on Boost.PFR. If you want to use yaml.h, also depends on yaml-cpp.
 
 ## Usage
 

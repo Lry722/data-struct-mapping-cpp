@@ -6,7 +6,10 @@ env = Environment()
 headers = Glob('include/*.h')
 library = SConscript('./SConscript', exports='env')
 
-prefix = '/usr/local/'
+if env.Detect('windows'):
+    prefix = 'C:\\Program Files\\'
+else:
+    prefix = '/usr/local/'
 
 env.Install(prefix + 'lib', library)
 
