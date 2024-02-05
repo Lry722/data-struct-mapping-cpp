@@ -1,7 +1,7 @@
 import os
 
 Import('env')
-env.Append(CPPPATH=['include'])
+env.Append(CPPPATH=[Dir('.').abspath + 'include'])
 
 sources = Glob('src/*.cpp')
 
