@@ -5,15 +5,11 @@
 
 namespace dsmap
 {
+    void yaml2struct(const YAML::Node &source, auto &target);
 
-    template <typename TargetT>
-    void yaml2struct(const YAML::Node &source, TargetT &target);
+    static void fetch_single(const YAML::Node &source, auto &property);
 
-    template <typename TargetT>
-    static void fetch_single(const YAML::Node &source, TargetT &property);
-
-    template <typename TargetT>
-    static void fetch_sequence(const YAML::Node &source, TargetT &property);
+    static void fetch_sequence(const YAML::Node &source, auto &property);
 
     static const auto &fetch = [](const YAML::Node &source, auto &property)
     {
@@ -25,8 +21,7 @@ namespace dsmap
             fetch_single(source, property);
     };
 
-    template <typename TargetT>
-    static void fetch_single(const YAML::Node &source, TargetT &property)
+    static void fetch_single(const YAML::Node &source, auto &property)
     {
         // Source should not be a sequence here.
         assert(!source.IsSequence());
@@ -42,8 +37,7 @@ namespace dsmap
         }
     }
 
-    template <typename TargetT>
-    static void fetch_sequence(const YAML::Node &source, TargetT &property)
+    static void fetch_sequence(const YAML::Node &source, auto &property)
     {
         // Source should be a sequence here.
         assert(source.IsSequence());
@@ -53,8 +47,7 @@ namespace dsmap
             fetch(source[i], property[i]);
     }
 
-    template <typename TargetT>
-    void yaml2struct(const YAML::Node &source, TargetT &target)
+    void yaml2struct(const YAML::Node &source, auto &target)
     {
         toStruct(source, target, fetch);
     }

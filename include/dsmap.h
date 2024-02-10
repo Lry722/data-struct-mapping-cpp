@@ -32,10 +32,9 @@ namespace dsmap
         };                                                                       \
     }
 
-    template <typename SourceT, typename TargetT, typename FuncT>
-    void toStruct(const SourceT &source, TargetT &target, FuncT &&fetch)
+    void toStruct(const auto &source, auto &target, auto &&fetch)
     {
-        static_assert(std::is_aggregate_v<TargetT>,
+        static_assert(std::is_aggregate_v<std::decay_t<decltype(target)>>,
                       "====================> dsmap: Target must be aggregate class!");
         utils::forEachProperty(target,
                                [&](std::string_view property_name, auto &property)
