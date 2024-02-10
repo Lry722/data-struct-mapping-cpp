@@ -1,6 +1,7 @@
 #pragma once
 
 #include "utils.h"
+#include <boost/pfr.hpp>
 
 namespace dsmap
 {
@@ -31,6 +32,29 @@ namespace dsmap
             inline static std::vector<std::string> properties_{};                \
         };                                                                       \
     }
+
+    namespace utils {
+
+        template <size_t I, typename FuncT, typename DataT>
+        void forEachProperty(DataT &data, FuncT &&func)
+        {
+            if constexpr (I >= boost::pfr::tuple_size<DataT>::value)
+                return;
+            else
+            {
+                func(DataT::Properties::get(I), boost::pfr::get<I>(data));
+                forEachProperty<I + 1>(data, std::forward<FuncT>(func));
+            }
+        }
+
+        template <class FuncT, typename DataT>
+        void forEachProperty(DataT &data, FuncT &&func)
+        {
+            forEachProperty<0>(data, std::forward<FuncT>(func));
+        }
+
+    }
+    
 
     void toStruct(const auto &source, auto &target, auto &&fetch)
     {

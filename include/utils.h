@@ -5,7 +5,6 @@
 #include <string_view>
 #include <type_traits>
 #include <vector>
-#include <boost/pfr.hpp>
 
 namespace dsmap::utils
 {
@@ -16,26 +15,6 @@ namespace dsmap::utils
             typename T::value_type;
         } &&
         !std::is_same_v<T, std::string>;
-
-    template <size_t I, typename FuncT, typename DataT>
-    void forEachProperty(DataT &data, FuncT &&func)
-    {
-        if constexpr (I >= boost::pfr::tuple_size<DataT>::value)
-        {
-            return;
-        }
-        else
-        {
-            func(DataT::Properties::get(I), boost::pfr::get<I>(data));
-            forEachProperty<I + 1>(data, std::forward<FuncT>(func));
-        }
-    }
-
-    template <class FuncT, typename DataT>
-    void forEachProperty(DataT &data, FuncT &&func)
-    {
-        forEachProperty<0>(data, std::forward<FuncT>(func));
-    }
 
     std::size_t FindMatchingParenthesis(std::string_view str, size_t start_pos);
 

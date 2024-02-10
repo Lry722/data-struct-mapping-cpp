@@ -6,6 +6,6 @@ env.Append(CPPPATH=[Dir('.').abspath + '/include'])
 sources = Glob('src/*.cpp')
 
 library_name = 'libdsmap'
-library = env.StaticLibrary(library_name, sources)
+library = env.Library(library_name, sources)
 
 Return('library')

@@ -3,13 +3,15 @@ import os
 
 env = Environment(CXXFLAGS = '-std=c++20')
 
-headers = Glob('include/*.h')
-library = SConscript('./SConscript', exports='env')
-
-if env.Detect('windows'):
-    prefix = 'C:\\Program Files\\'
+print(env['PLATFORM'])
+if env['PLATFORM'] == 'win32':
+    prefix = './build/'
+    env['LIBSUFFIX']='.lib'
 else:
     prefix = '/usr/local/'
+
+headers = Glob('include/*.h')
+library = SConscript('./SConscript', exports='env')
 
 env.Install(prefix + 'lib', library)
 
