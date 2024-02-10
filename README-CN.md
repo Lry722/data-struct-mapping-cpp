@@ -16,6 +16,8 @@
 scons install
 ```
 
+在 Windows 平台上，安装结果位于项目目录下的 build 文件夹。在 Unix-Like 平台上，会直接安装到 /usr/local 目录下。
+
 要作为你自己项目的一部分编译，也提供了 SConscript 文件，只需要接收其返回的 `libdsmap` 即可。
 
 项目依赖于 Boost.PFR，如果要使用 yaml 映射，还依赖于 yaml-cpp。

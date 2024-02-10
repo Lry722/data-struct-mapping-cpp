@@ -16,6 +16,8 @@ To install, simply run the following command in the root directory of the projec
 scons install
 ```
 
+On Windows, installs go to the project's `build` directory. On Unix-like systems, they're installed under `/usr/local/`.
+
 For integrating this project to your own project, a SConscript file has been provided. You just need to recieve the library object returned by the SConscript and link it.
 
 The tool depends on Boost.PFR. If you want to use yaml.h, also depends on yaml-cpp.
