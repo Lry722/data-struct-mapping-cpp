@@ -1,3 +1,5 @@
+English | [中文](README-CN.md)
+
 ## Introduction
 
 A tool for mapping the contents of a dictionary-like container (that supports value retrieval through the '[]' operator) with strings as keys to an aggregate class.

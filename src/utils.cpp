@@ -7,7 +7,7 @@
 namespace dsmap::utils
 {
 
-    std::size_t FindClosingParenthesis(std::string_view str, size_t start_pos)
+    std::size_t FindMatchingParenthesis(std::string_view str, size_t start_pos)
     {
         int open_brackets = 0;
         for (size_t i = start_pos; i < str.size(); ++i)
@@ -48,7 +48,7 @@ namespace dsmap::utils
             if (it == end || pos < it->position())
             {
                 size_t begin_pos =
-                    FindClosingParenthesis(definition, pos + kMacro.size()) + 1;
+                    FindMatchingParenthesis(definition, pos + kMacro.size()) + 1;
                 size_t end_pos = definition.find(';', begin_pos);
                 result.push_back(
                     trim_copy(definition.substr(begin_pos, end_pos - begin_pos)));

@@ -11,14 +11,14 @@ namespace dsmap::utils
 {
 
     template <typename T>
-    concept is_sequence = 
-    requires {
-        typename T::value_type;
-    } &&
-    !std::is_same_v<T, std::string>;
+    concept is_sequence =
+        requires {
+            typename T::value_type;
+        } &&
+        !std::is_same_v<T, std::string>;
 
     template <size_t I, typename FuncT, typename DataT>
-    void applyOnProperties(DataT &data, FuncT &&func)
+    void forEachProperty(DataT &data, FuncT &&func)
     {
         if constexpr (I >= boost::pfr::tuple_size<DataT>::value)
         {
@@ -27,17 +27,17 @@ namespace dsmap::utils
         else
         {
             func(DataT::Properties::get(I), boost::pfr::get<I>(data));
-            applyOnProperties<I + 1>(data, std::forward<FuncT>(func));
+            forEachProperty<I + 1>(data, std::forward<FuncT>(func));
         }
     }
 
     template <class FuncT, typename DataT>
-    void applyOnProperties(DataT &data, FuncT &&func)
+    void forEachProperty(DataT &data, FuncT &&func)
     {
-        applyOnProperties<0>(data, std::forward<FuncT>(func));
+        forEachProperty<0>(data, std::forward<FuncT>(func));
     }
 
-    std::size_t FindClosingParenthesis(std::string_view str, size_t start_pos);
+    std::size_t FindMatchingParenthesis(std::string_view str, size_t start_pos);
 
     std::vector<std::string> parsePropertyNames(const std::string &definition);
 
