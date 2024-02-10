@@ -19,14 +19,10 @@ namespace dsmap
     {
         using PropertyType = std::remove_reference_t<decltype(property)>;
 
-        if constexpr (utils::is_sequence_v<PropertyType>)
-        {
+        if constexpr (utils::is_sequence<PropertyType>)
             fetch_sequence(source, property);
-        }
         else
-        {
             fetch_single(source, property);
-        }
     };
 
     template <typename TargetT>

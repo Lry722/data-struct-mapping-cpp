@@ -10,26 +10,12 @@
 namespace dsmap::utils
 {
 
-    template <typename, typename = void>
-    struct has_value_type : std::false_type
-    {
-    };
-
     template <typename T>
-    struct has_value_type<T, std::void_t<typename T::value_type>> : std::true_type
-    {
-    };
-
-    template <typename T>
-    using is_not_string = std::negation<std::is_same<T, std::string>>;
-
-    template <typename T>
-    using is_sequence = std::conjunction<
-        is_not_string<T>,
-        has_value_type<T>>;
-
-    template <typename T>
-    inline constexpr bool is_sequence_v = is_sequence<T>::value;
+    concept is_sequence = 
+    requires {
+        typename T::value_type;
+    } &&
+    !std::is_same_v<T, std::string>;
 
     template <size_t I, typename FuncT, typename DataT>
     void applyOnProperties(DataT &data, FuncT &&func)

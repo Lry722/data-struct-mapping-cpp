@@ -32,7 +32,7 @@ namespace dsmap::utils
     std::vector<std::string> parsePropertyNames(const std::string &definition)
     {
         static const std::string_view kMacro{"STRUCT_WITH_PROPERTIES"};
-        static const std::regex re(R"(\s+([0-9a-zA-Z_]+)[^;\s]*;)");
+        static const std::regex re(R"(\b([a-zA-Z_][a-zA-Z0-9_]*)\b\s*[,{=;])");
 
         std::vector<std::string> result{};
 

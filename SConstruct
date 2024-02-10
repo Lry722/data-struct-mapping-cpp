@@ -1,7 +1,7 @@
 # from SCons import Environment, Glob
 import os
 
-env = Environment()
+env = Environment(CXXFLAGS = '-std=c++20')
 
 headers = Glob('include/*.h')
 library = SConscript('./SConscript', exports='env')

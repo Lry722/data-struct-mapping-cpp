@@ -65,18 +65,6 @@ STRUCT_WITH_PROPERTIES(Outer,
 ) outer;
 ```
 
-Note that you should use `{}` to initialize properties as much as possible. If you want to use `=`, make sure there are no spaces:
-
-```cpp
-STRUCT_WITH_PROPERTIES(Data,
-    int a{10};  // Good
-    int b=10;   // Okay
-    int c = 10; // Error!
-)
-```
-
-Trying to solve this problem.
-
 #### 3. Customize
 
 If you want to customize the mapping of other containers, you need to use the `toStruct` function, which accepts three parameters:

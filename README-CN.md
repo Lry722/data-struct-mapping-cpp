@@ -66,18 +66,6 @@ STRUCT_WITH_PROPERTIES(Outer,
 ) outer;
 ```
 
-需要注意的是，请尽可能使用`{}`来初始化 property，如果要使用`=`，请确保没有空格：
-
-```cpp
-STRUCT_WITH_PROPERTIES(Data,
-    int a{10};  // Good
-    int b=10;   // Okay
-    int c = 10; // Error!
-)
-```
-
-在未来会想办法解决这个问题。
-
 #### 3. 自定义方案
 
 如果要自定义其他容器的映射，则需要借助`toStruct`函数，该函数接受三个参数：
