@@ -10,7 +10,7 @@ namespace dsmap
     struct name                                                                  \
     {                                                                            \
         definition;                                                              \
-        template <size_t I, typename FuncT, typename DataT>                      \
+        template <std::size_t I, typename FuncT, typename DataT>                 \
         friend void dsmap::utils::forEachProperty(DataT &data, FuncT &&func);    \
                                                                                  \
     private:                                                                     \
@@ -19,7 +19,7 @@ namespace dsmap
         public:                                                                  \
             static const std::string_view get(std::size_t i)                     \
             {                                                                    \
-                if (!initialized)                                                \
+                if (!initialized) [[unlikely]]                                   \
                 {                                                                \
                     properties_ = dsmap::utils::parsePropertyNames(#definition); \
                     initialized = true;                                          \
@@ -35,7 +35,7 @@ namespace dsmap
 
     namespace utils {
 
-        template <size_t I, typename FuncT, typename DataT>
+        template <std::size_t I, typename FuncT, typename DataT>
         void forEachProperty(DataT &data, FuncT &&func)
         {
             if constexpr (I >= boost::pfr::tuple_size<DataT>::value)
@@ -54,7 +54,6 @@ namespace dsmap
         }
 
     }
-    
 
     void toStruct(const auto &source, auto &target, auto &&fetch)
     {
